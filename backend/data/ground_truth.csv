@@ -1,0 +1,101 @@
+transaction_id,scenario,manual_review,notes
+TXN-00001,SUCCESS,False,Settlement completed normally.
+TXN-00002,UNCLASSIFIED,True,Conflicting values intentionally created for manual review.
+TXN-00003,SUCCESS,False,Settlement completed normally.
+TXN-00004,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00005,SUCCESS,False,Settlement completed normally.
+TXN-00006,SUCCESS,False,Settlement completed normally.
+TXN-00007,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00008,DUPLICATE_UTR,False,UTR is shared with TXN-00083.
+TXN-00009,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00010,SUCCESS,False,Settlement completed normally.
+TXN-00011,SUCCESS,False,Settlement completed normally.
+TXN-00012,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00013,SUCCESS,False,Settlement completed normally.
+TXN-00014,SUCCESS,False,Settlement completed normally.
+TXN-00015,SUCCESS,False,Settlement completed normally.
+TXN-00016,SUCCESS,False,Settlement completed normally.
+TXN-00017,SUCCESS,False,Settlement completed normally.
+TXN-00018,SUCCESS,False,Settlement completed normally.
+TXN-00019,SUCCESS,False,Settlement completed normally.
+TXN-00020,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00021,DUPLICATE_UTR,False,UTR is shared with TXN-00052.
+TXN-00022,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00023,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00024,SUCCESS,False,Settlement completed normally.
+TXN-00025,SUCCESS,False,Settlement completed normally.
+TXN-00026,SUCCESS,False,Settlement completed normally.
+TXN-00027,SUCCESS,False,Settlement completed normally.
+TXN-00028,DUPLICATE_UTR,False,UTR is shared with TXN-00069.
+TXN-00029,SUCCESS,False,Settlement completed normally.
+TXN-00030,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00031,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00032,SUCCESS,False,Settlement completed normally.
+TXN-00033,SUCCESS,False,Settlement completed normally.
+TXN-00034,SUCCESS,False,Settlement completed normally.
+TXN-00035,SUCCESS,False,Settlement completed normally.
+TXN-00036,SUCCESS,False,Settlement completed normally.
+TXN-00037,SUCCESS,False,Settlement completed normally.
+TXN-00038,SUCCESS,False,Settlement completed normally.
+TXN-00039,SUCCESS,False,Settlement completed normally.
+TXN-00040,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00041,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00042,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00043,UNCLASSIFIED,True,Conflicting values intentionally created for manual review.
+TXN-00044,UNCLASSIFIED,True,Conflicting values intentionally created for manual review.
+TXN-00045,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00046,SUCCESS,False,Settlement completed normally.
+TXN-00047,SUCCESS,False,Settlement completed normally.
+TXN-00048,SUCCESS,False,Settlement completed normally.
+TXN-00049,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00050,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00051,SUCCESS,False,Settlement completed normally.
+TXN-00052,DUPLICATE_UTR,False,UTR is shared with TXN-00021.
+TXN-00053,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00054,SUCCESS,False,Settlement completed normally.
+TXN-00055,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00056,UNCLASSIFIED,True,Conflicting values intentionally created for manual review.
+TXN-00057,DUPLICATE_UTR,False,UTR is shared with TXN-00094.
+TXN-00058,SUCCESS,False,Settlement completed normally.
+TXN-00059,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00060,SUCCESS,False,Settlement completed normally.
+TXN-00061,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00062,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00063,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00064,SUCCESS,False,Settlement completed normally.
+TXN-00065,SUCCESS,False,Settlement completed normally.
+TXN-00066,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00067,DUPLICATE_UTR,False,UTR is shared with TXN-00082.
+TXN-00068,SUCCESS,False,Settlement completed normally.
+TXN-00069,DUPLICATE_UTR,False,UTR is shared with TXN-00028.
+TXN-00070,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00071,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00072,SUCCESS,False,Settlement completed normally.
+TXN-00073,SUCCESS,False,Settlement completed normally.
+TXN-00074,SUCCESS,False,Settlement completed normally.
+TXN-00075,SUCCESS,False,Settlement completed normally.
+TXN-00076,SUCCESS,False,Settlement completed normally.
+TXN-00077,AMOUNT_MISMATCH,False,Bank credited a different amount than expected.
+TXN-00078,SUCCESS,False,Settlement completed normally.
+TXN-00079,SUCCESS,False,Settlement completed normally.
+TXN-00080,SUCCESS,False,Settlement completed normally.
+TXN-00081,SUCCESS,False,Settlement completed normally.
+TXN-00082,DUPLICATE_UTR,False,UTR is shared with TXN-00067.
+TXN-00083,DUPLICATE_UTR,False,UTR is shared with TXN-00008.
+TXN-00084,SUCCESS,False,Settlement completed normally.
+TXN-00085,SUCCESS,False,Settlement completed normally.
+TXN-00086,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00087,SUCCESS,False,Settlement completed normally.
+TXN-00088,SUCCESS,False,Settlement completed normally.
+TXN-00089,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00090,SUCCESS,False,Settlement completed normally.
+TXN-00091,SUCCESS,False,Settlement completed normally.
+TXN-00092,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00093,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00094,DUPLICATE_UTR,False,UTR is shared with TXN-00057.
+TXN-00095,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00096,PARTIAL_SETTLEMENT,False,Only part of the expected settlement amount was credited.
+TXN-00097,SUCCESS,False,Settlement completed normally.
+TXN-00098,BANK_DELAY,False,"Gateway succeeded, but bank settlement is delayed."
+TXN-00099,MISSING_BANK_RECORD,False,No corresponding bank settlement record exists.
+TXN-00100,SUCCESS,False,Settlement completed normally.
