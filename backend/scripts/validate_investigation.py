@@ -1,9 +1,13 @@
-import pandas as pd
+import sys
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(BASE_DIR))
+
+import pandas as pd
 from app.services.investigation_service import investigate_transaction
 
-
-GROUND_TRUTH_FILE = "data/ground_truth.csv"
+GROUND_TRUTH_FILE = BASE_DIR / "data" / "ground_truth.csv"
 
 ground_truth = pd.read_csv(GROUND_TRUTH_FILE)
 
