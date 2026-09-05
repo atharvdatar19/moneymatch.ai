@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import logging
 
-logger = logging.getLogger("reconai.security")
+logger = logging.getLogger("moneymatch.security")
 
 
 def audit_event(action: str, transaction_id: str | None = None, outcome: str = "ok") -> None:

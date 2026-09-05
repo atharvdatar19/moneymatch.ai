@@ -1,4 +1,4 @@
-# MoneyMatch.AI (TracePay AI)
+# moneymatch.ai
 
 > AI-Powered Merchant Settlement Investigation & Reconciliation Platform (PS-8).
 
@@ -139,3 +139,41 @@ Tests run:
 7. Real `TXN-00049` `BANK_DELAY` live test
 8. Critical security test: blocking hallucinated `FRAUD` categories
 9. `UNCLASSIFIED` scenario preservation
+
+
+## Security regression tests
+
+From `backend/`:
+
+```bash
+PYTHONPATH=. python3 scripts/test_security.py
+python3 -m compileall -q .
+```
+
+The deterministic investigation engine remains the source of truth; the LLM is restricted to explanation and Q&A. Do not commit `.env`, API keys, `.venv`, `node_modules`, or build artifacts. For public deployment, configure `APP_API_KEY` or place the API behind an authenticated gateway.
+
+## Vercel deployment
+
+This repository is configured as a single Vercel project: the Vite/React frontend is built from `frontend/`, while FastAPI is exposed through `api/index.py` under `/api/*`. Vercel supports FastAPI through its Python runtime and Vite/React as a frontend deployment.
+
+Required Vercel environment variables:
+
+- `GROQ_API_KEY` — required for live AI explanation/Q&A.
+- `GROQ_MODEL` — optional; defaults to the value in the backend configuration.
+- `GROQ_TEMPERATURE` — optional.
+- `GROQ_MAX_TOKENS` — optional.
+- `APP_API_KEY` — optional for a protected deployment. Do not set this if the browser frontend must call the API directly without an auth-token integration.
+- `CORS_ORIGINS` — optional comma-separated origins for cross-origin deployments. The single-domain Vercel deployment is same-origin.
+
+Never expose `GROQ_API_KEY` in `frontend/.env`, Vite client code, or `VITE_*` variables.
+
+### Local Vercel verification
+
+```bash
+npm install -g vercel
+vercel login
+vercel link
+vercel dev
+```
+
+The local Vercel server should expose the frontend and `/api/*` from the same origin.

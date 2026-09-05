@@ -72,7 +72,7 @@ export default function Navbar() {
                 letterSpacing: "-0.02em",
                 color: "#F8FAFC",
               }}>
-                MoneyMatch<span style={{ color: "var(--accent-cyan)" }}>.AI</span>
+                moneymatch<span style={{ color: "var(--accent-cyan)" }}>.ai</span>
               </span>
               <span style={{
                 fontSize: "10px",

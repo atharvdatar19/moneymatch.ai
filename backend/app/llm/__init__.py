@@ -1,4 +1,4 @@
-"""LLM integration package for TracePay AI / MoneyMatch.AI."""
+"""LLM integration package for moneymatch.ai."""
 from app.llm.groq_client import (
     call_groq,
     get_groq_client,

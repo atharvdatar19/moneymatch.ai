@@ -1,4 +1,4 @@
-"""Groq LLM Provider Integration for TracePay AI.
+"""Groq LLM Provider Integration for moneymatch.ai.
 
 Handles client configuration, chat completions, limited retries for
 transient errors, JSON response formatting, and controlled error handling.
@@ -37,7 +37,7 @@ if _ENV_PATH.exists():
 else:
     load_dotenv()
 
-logger = logging.getLogger("reconai.llm")
+logger = logging.getLogger("moneymatch.llm")
 
 
 # ---------------------------------------------------------------------------

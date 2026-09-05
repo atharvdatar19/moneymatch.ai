@@ -18,19 +18,6 @@ def sanitize_source_record(record: dict[str, Any] | None) -> dict[str, Any]:
     return mask_sensitive_data(selected)
 
 
-def sanitize_for_llm(record: Any) -> dict[str, Any]:
-    """Return only evidence needed to explain one reconciliation result."""
-    return {
-        "order_id": getattr(record, "order_id", ""),
-        "discrepancy_type": getattr(getattr(record, "discrepancy_type", None), "value", str(getattr(record, "discrepancy_type", ""))),
-        "discrepancy_description": str(getattr(record, "discrepancy_description", ""))[:1000],
-        "rule_flags": [str(x)[:200] for x in (getattr(record, "rule_flags", []) or [])][:20],
-        "ledger_record": sanitize_source_record(getattr(record, "ledger", None)),
-        "gateway_record": sanitize_source_record(getattr(record, "gateway", None)),
-        "bank_record": sanitize_source_record(getattr(record, "bank", None)),
-    }
-
-
 def sanitize_investigation_for_llm(
     result: dict[str, Any]
 ) -> dict[str, Any]:

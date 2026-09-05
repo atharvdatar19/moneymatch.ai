@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 
 INJECTION_PATTERNS = [
-    re.compile(r"ignore\s+(all|any|the)\s+(previous|prior|above)\s+instructions?", re.I),
+    re.compile(r"(?:ignore|disregard|forget)\s+(?:all\s+|any\s+|the\s+)?(?:previous|prior|above|earlier)\s+instructions?", re.I),
     re.compile(r"system\s+prompt", re.I),
     re.compile(r"developer\s+message", re.I),
     re.compile(r"reveal\s+(your|the)\s+(instructions?|prompt|api\s*key|secret)", re.I),

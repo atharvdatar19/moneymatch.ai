@@ -12,12 +12,10 @@ from app.security.validation import validate_transaction_id, validate_search
 from app.security.auth import require_api_key
 from app.security.rate_limit import rate_limit
 from app.security.audit import audit_event
-from app.security.pii import mask_sensitive_data
 from app.security.prompt_guard import contains_prompt_injection, validate_llm_input
-from app.security.llm_output import validate_llm_output
-from app.llm.groq_client import call_groq, GroqClientError
+from app.llm.groq_client import call_groq
 
-logger = logging.getLogger("reconai.api")
+logger = logging.getLogger("moneymatch.api")
 
 router = APIRouter(
     prefix="/api",
@@ -35,7 +33,19 @@ class AskRequest(BaseModel):
 
 
 class BatchInvestigateRequest(BaseModel):
-    transaction_ids: Optional[List[str]] = None
+    transaction_ids: Optional[List[str]] = Field(default=None, max_length=100)
+
+
+ALLOWED_SCENARIOS = {
+    "ALL",
+    "SUCCESS",
+    "BANK_DELAY",
+    "DUPLICATE_UTR",
+    "AMOUNT_MISMATCH",
+    "MISSING_BANK_RECORD",
+    "PARTIAL_SETTLEMENT",
+    "UNCLASSIFIED",
+}
 
 
 @router.get("/transactions")
@@ -44,6 +54,11 @@ def list_transactions(search: Optional[str] = None, scenario: Optional[str] = No
     List all transactions from the gateway settlement dataset,
     optionally filtered by search query or scenario category.
     """
+    search = validate_search(search)
+    scenario = scenario.upper().strip() if scenario else None
+    if scenario and scenario not in ALLOWED_SCENARIOS:
+        raise HTTPException(status_code=400, detail="Invalid scenario.")
+
     try:
         gateway_df = pd.read_csv(GATEWAY_FILE)
         ground_truth_file = Path(GATEWAY_FILE).parent / "ground_truth.csv"
@@ -156,7 +171,12 @@ def investigate_batch(payload: Optional[BatchInvestigateRequest] = None):
         gateway_df = pd.read_csv(GATEWAY_FILE)
         all_ids = gateway_df["transaction_id"].astype(str).tolist()
 
-        target_ids = payload.transaction_ids if (payload and payload.transaction_ids) else all_ids
+        if payload and payload.transaction_ids:
+            target_ids = [validate_transaction_id(tx_id) for tx_id in payload.transaction_ids]
+            if len(target_ids) > 100:
+                raise HTTPException(status_code=400, detail="A batch may contain at most 100 transaction IDs.")
+        else:
+            target_ids = all_ids
 
         total = len(target_ids)
         success_count = 0
@@ -270,7 +290,8 @@ def explain(transaction_id: str):
         }
 
     except Exception as exc:
-        logger.error(f"Error during AI explanation: {exc}")
+        logger.error("Error during AI explanation", exc_info=True)
+        audit_event("transaction_explanation", transaction_id, "fallback")
         return {
             "transaction_id": transaction_id,
             "deterministic_category": diagnosis,
@@ -279,7 +300,6 @@ def explain(transaction_id: str):
             "ai_suggested_action": investigation.get("recommended_action", "Review transaction manually."),
             "ai_category": diagnosis,
             "status": "fallback",
-            "error": str(exc),
         }
 
 
@@ -296,6 +316,7 @@ def ask_copilot(payload: AskRequest):
     question = payload.question.strip()
 
     if contains_prompt_injection(question):
+        audit_event("copilot_prompt_injection", transaction_id, "blocked")
         return {
             "transaction_id": transaction_id,
             "question": question,
@@ -308,6 +329,7 @@ def ask_copilot(payload: AskRequest):
         raise HTTPException(status_code=404, detail=f"Transaction {transaction_id} not found.")
 
     try:
+        question = validate_llm_input(question)
         safe_context = sanitize_investigation_for_llm(investigation)
 
         def groq_caller(sys_p: str, usr_p: str) -> str:
@@ -330,4 +352,4 @@ def ask_copilot(payload: AskRequest):
             "answer": f"Based on the records, this transaction has status '{investigation['diagnosis']['category']}'. {investigation.get('reason', '')}",
             "status": "fallback",
         }
-
+
